@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<form action="login-result.jsp">
+	ID <input type="text" name="id"/><br />
+	PASS <input type="text" name="pass"/><br />
+	<input type="submit" id="btn" value="JOIN"/>
+	</form>
 </body>
 </html>

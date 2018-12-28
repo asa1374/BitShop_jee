@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<form action="open-result.jsp">
+	이름 입력 <input type="text" name="name" />
+	<input type="submit" id="btn" value ="계좌만들기" />
+	</form>
 </body>
 </html>
