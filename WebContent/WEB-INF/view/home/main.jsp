@@ -8,12 +8,14 @@
 </head>
 <body>
 	<div>
-		<img src="<%= request.getContextPath() %>/resources/img/2019.jpg" alt="" width="1000" height="1200"/>
+		<p style="text-align: center;">
+			<img src="<%= request.getContextPath() %>/resources/img/2019.jpg" alt="" /><br />	
+		</p>
 	</div>
-	<h1> 메뉴 </h1>
-	<a href="member/main.jsp">회원관리</a>
-	<a href="account/main.jsp">계좌관리</a>
-	<a href="">게시판</a>
-	<a href="">관리자</a>
+		<h1 style="text-align: center"> 메뉴 </h1>
+		<a href="member/main.jsp" style="text-align: center" >회원관리</a><br />
+		<a href="account/main.jsp" style="text-align: center" >계좌관리</a><br />
+		<a href="" style="text-align: center" >게시판</a><br />
+		<a href="" style="text-align: center" >관리자</a>
 </body>
 </html>
