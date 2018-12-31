@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div>
-		<img src="<%= request.getContextPath() %>/resources/img/2019.jpg" alt="" />
+		<img src="<%= request.getContextPath() %>/resources/img/2019.jpg" alt="" width="1000" height="1200"/>
 	</div>
 	<h1> 메뉴 </h1>
 	<a href="member/main.jsp">회원관리</a>
