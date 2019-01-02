@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>게시판</h1>
+	<h1>관리자 메인</h1>
 	<a href="../index.jsp">홈으로 갑니다.</a>
 </body>
 </html>
