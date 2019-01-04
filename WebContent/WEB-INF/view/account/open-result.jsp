@@ -59,14 +59,12 @@
 		</td>
 		<td>
 			<div>
-					<h1 style="font-size: 60px; color: #888" >  성공</h1>
-					<h1>계좌번호 : </h1>
-					잔액  : <br></br>
+					<h1 style="font-size: 40px; color: #888" >  성공</h1>
+					<%@ include file="content.jsp" %>
 					<form action="account.do">
 					<input type="hidden" name="dir" value="account"/>
 					<input type="submit" id="btn" value="확인" />
 					</form>
-				
 			</div>
 		</td>
 	</tr>

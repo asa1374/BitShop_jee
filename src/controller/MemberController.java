@@ -27,6 +27,8 @@ public class MemberController extends HttpServlet {
 				dir = "";
 				page="index";
 			}
+			request.setAttribute("name", "이창준");
+			request.setAttribute("compo", "login-success");
 			Command.move(request, response, dir,page);
 			break;
 		case "move" :
