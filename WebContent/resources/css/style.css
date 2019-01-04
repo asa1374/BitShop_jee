@@ -33,9 +33,10 @@
   padding: 0;
   overflow: hidden;
   background-color: #333;
+  height: 30%
 }
 #footer{
-	height :200px;
+	height :100px;
 }
 li {
   float: left;
