@@ -9,24 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
-
-/**
- * Servlet implementation class AdminController
- */
 @WebServlet("/admin.do")
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getParameter("cmd");
+		cmd = (cmd==null) ? "move": cmd;
 		String dir = request.getParameter("dir");
 		dir = (dir==null)? request.getServletPath().substring(1, request.getServletPath().indexOf('.')): dir ;
 		String page = request.getParameter("page");
 		page = (page==null)? "main":page;
-		switch((cmd == null) ? "move": cmd) {
+		switch(cmd) {
 		case "move" :
 			System.out.println("~~~admin 이동~~~");
-			Command.move(request, response, dir+"/"+page);
+			Command.move(request, response, dir,page);
 			break;
 		}
 	}

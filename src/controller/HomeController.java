@@ -17,15 +17,14 @@ public class HomeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getParameter("cmd");
+		cmd = (cmd==null) ? "move": cmd;
 		String dir = request.getParameter("dir");
-		if(dir==null) {dir=request.getServletPath().substring(1, request.getServletPath().indexOf('.'));}
-		System.out.println(dir);
+		dir = (dir==null)? request.getServletPath().substring(1, request.getServletPath().indexOf('.')): dir ;
 		String page = request.getParameter("page");
-		if(page==null) {page = "main";}
-		System.out.println(page);
-		switch((cmd==null)?"move":cmd) {
+		page = (page==null)? "main":page;
+		switch(cmd) {
 		case "move" :
-			Command.move(request, response, dir+"/"+page);
+			Command.move(request, response, dir,page);
 			break;
 		}
 	}
