@@ -16,11 +16,18 @@ public class AccountController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Account로 진입");
-		String action = null;
-		switch((action==null) ? "move": action) {
+		String cmd = request.getParameter("cmd");
+		String dir = request.getParameter("dir");
+		if(dir==null) {
+			dir=request.getServletPath().substring(1, request.getServletPath().indexOf('.'));
+		}
+		System.out.println("dir====="+dir);
+		String page = request.getParameter("page");
+		page = (page==null)?"main":page;
+		switch((cmd==null) ? "move": cmd) {
 		case "move" :
 			System.out.println("~~~~account 이동~~");
-			Command.move(request, response, "member/main");
+			Command.move(request, response, dir+"/"+page);
 			break;
 		}
 	}
