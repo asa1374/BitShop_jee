@@ -35,7 +35,7 @@
 					</table>
 				</form>
 				<a id="admin-link" href="#">관리자</a> |
-					<a id="join-link" href="#">회원가입</a>
+					<a id="join-link" href="member.do?dest=join-form">회원가입</a>
 			</td>
 		</tr>
 	</table>

@@ -32,6 +32,9 @@ public class MemberController extends HttpServlet {
 			Command.move(request, response, dir,page);
 			break;
 		case "move" :
+			String dest = request.getParameter("dest");
+			dest = (dest==null)? "NONE": dest;
+			request.setAttribute("dest", dest);
 			Command.move(request, response, dir,page);
 			break;
 		}

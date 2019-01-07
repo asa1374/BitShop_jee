@@ -30,15 +30,23 @@ public class AccountController extends HttpServlet {
 		System.out.println(page);
 		switch(cmd) {
 		case "move" :
+			String dest = request.getParameter("dest");
+			System.out.println("dest =====" + dest);
+			dest = (dest==null)? "NONE": dest;
+			request.setAttribute("dest", dest);
 			Command.move(request, response, dir,page);
 			break;
 		case "open-account" :
 			System.out.println("account-open으로 진입한드아");
+			dest = request.getParameter("dest");
+			dest = (dest==null)? "open-result": dest;
+			request.setAttribute("dest", dest );
 			String money = request.getParameter("money");
 			String accNum =  accountservice.openAccountNum(Integer.parseInt(money));
 			AccountBean acc = accountservice.listAccountNum(accNum);
 			request.setAttribute("acc",acc);
 			request.setAttribute("compo", "acc-success");
+			System.out.println("컨트롤러 에서 경로"+dir+page);
 			Command.move(request, response, dir, page);
 			break;
 		}

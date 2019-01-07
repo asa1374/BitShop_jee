@@ -44,8 +44,9 @@ public class AccountServiceImpl implements AccountService{
 	public AccountBean listAccountNum(String accountNum) {
 		AccountBean account = new AccountBean();
 		for(int i=0;i<list.size();i++) {
-			if(list.get(i).getAccountNum().equals(accountNum)) {
+			if(accountNum.equals(list.get(i).getAccountNum())) {
 				account = list.get(i);
+				break;
 			}
 		}
 		return account;
