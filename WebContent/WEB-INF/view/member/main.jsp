@@ -21,19 +21,36 @@
 	</tr>
 	<tr style="height : 300px">
 		<td width="30%">
+		<%
+		String dest = String.valueOf(request.getAttribute("dest"));
+		if(dest.equals("join-form")){
+			%>
+			<%@ include file="side-join.jsp" %>
+			<%
+		}else{
+			%>
 			<%@ include file="side-menu.jsp" %>
+			<%
+		}
+		%>
 		</td>
 		<td>
 			<% 
 				switch(String.valueOf(request.getAttribute(("dest")))){
 				case "NONE" :
 					%>
-					<%@ include file="mypage.jsp" %>
+					<%@ include file="side-join.jsp" %>
 					<%
 					break;
 				case "join-form" :
 					%>
 					<%@ include file="join-form.jsp" %>
+					<%
+					break;
+				case "mypage" :
+					System.out.print("mypage로 들어옴");
+					%>
+					<%@ include file="mypage.jsp" %>
 					<%
 					break;
 				}

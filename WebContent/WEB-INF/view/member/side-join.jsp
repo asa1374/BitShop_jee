@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="side-menu">
+<div id="side-join">
 	<table>
 		<tr>
-			<td>마이페이지</td>
-		</tr>
-		<tr>
-			<td>정보 변경</td>
-		</tr>
-		<tr>
-			<td>회원탈퇴</td>
+			<td>회원 가입시 주의사항</td>
 		</tr>
 	</table>
 </div>
