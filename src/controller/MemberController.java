@@ -7,13 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import command.Command;
 import domain.MemberBean;
-import service.MemberService;
 import service.MemberServiceImpl;
 @WebServlet("/member.do")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberService memberService = MemberServiceImpl.getInstance();
 		MemberBean member = null;
 		System.out.println("멤버 서블릿으로 들어옴");
 		String cmd = request.getParameter("cmd");
@@ -52,10 +50,32 @@ public class MemberController extends HttpServlet {
 			member.setPass(pass);
 			String ssn = request.getParameter("ssn");
 			member.setSsn(ssn);
-			memberService.createMember(member);
-			member = memberService.findId(id);
+			MemberServiceImpl.getInstance().createMember(member);
+			member = MemberServiceImpl.getInstance().findMembersById(id);
 			request.setAttribute("member", member);
 			Command.move(request, response, dir,page);
+			break;
+		case "findAll" :
+			MemberServiceImpl.getInstance().findAllMembers();
+			break;
+		case "findByName" :
+			name = request.getParameter("name");
+			MemberServiceImpl.getInstance().findMembersByName(name);
+			break;
+		case "findById" :
+			id = request.getParameter("id");
+			MemberServiceImpl.getInstance().findMembersById(id);		
+			break;
+		case "countMember" :
+			MemberServiceImpl.getInstance().countMember();
+			break;
+		case "changeMember" :
+			MemberServiceImpl.getInstance().changeMember(member);
+			break;
+		case "removeMember" :
+			id = request.getParameter("id");
+			pass = request.getParameter("pass");
+			MemberServiceImpl.getInstance().remoneId(id, pass);
 			break;
 		}
 	}

@@ -5,24 +5,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import dao.AccountDaoImpl;
 import domain.AccountBean;
 
 public class AccountServiceImpl implements AccountService{
-	private ArrayList<AccountBean> list;
-	public AccountServiceImpl() {
+	private static AccountServiceImpl instance = new AccountServiceImpl();
+	private AccountServiceImpl() {
 		list = new ArrayList<>();
+		dao = AccountDaoImpl.getInstance();
+	}
+	private ArrayList<AccountBean> list;
+	AccountDaoImpl dao; 
+	public static AccountServiceImpl getInstance() {
+		return instance;
 	}
 
 	@Override
-	public String openAccountNum(int money) {
-		String accNum = "";
+	public void openAccountNum(int money) {
 		AccountBean account = new AccountBean();
 		account.setAccountNum(createAccountNum());
 		account.setMoney(money);
 		account.setToday(date());
 		list.add(account);
-		accNum = account.getAccountNum();
-		return accNum;
+		dao.insertAccount(account);
 	}
 	@Override
 	public String createAccountNum() {
@@ -36,13 +41,15 @@ public class AccountServiceImpl implements AccountService{
 		return sdf.format(date);
 	}
 	@Override
-	public ArrayList<AccountBean> list() {
+
+	public ArrayList<AccountBean> findAllAccounts() {
+		ArrayList<AccountBean> list = dao.selectAllAccounts();
 		return list;
 	}
 
 	@Override
-	public AccountBean listAccountNum(String accountNum) {
-		AccountBean account = new AccountBean();
+	public AccountBean findByAccountNum(String accountNum) {
+		AccountBean account = dao.selectAccountByAccountNum(accountNum);
 		for(int i=0;i<list.size();i++) {
 			if(accountNum.equals(list.get(i).getAccountNum())) {
 				account = list.get(i);
@@ -53,29 +60,26 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	@Override
-	public String accountCount() {
-		// TODO Auto-generated method stub
-		return null;
+	public String countAccount() {
+		String count = dao.countAccount();
+		return count;
 	}
 
 	@Override
-	public void updateDeposit(String account, int money) {
-		// TODO Auto-generated method stub
+	public void changeDeposit(String account, int money) {
+		dao.updateDeposit(money);
 		
 	}
 
 	@Override
-	public void updateWidthraw(String account, int money) {
-		// TODO Auto-generated method stub
+	public void changeWidthraw(String account, int money) {
+		dao.updateWidthraw(money);
 		
 	}
 
 	@Override
-	public void deleteAccount(String account) {
-		// TODO Auto-generated method stub
+	public void removeAccount(String account) {
+		dao.deleteAccount(account);
 		
 	}
-	
-	
-	
 }

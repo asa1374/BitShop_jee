@@ -6,11 +6,11 @@ import domain.MemberBean;
 
 public interface MemberDao {
 	public void insertMember(MemberBean member);
-	public ArrayList<MemberBean> selectMembers();
-	public ArrayList<MemberBean> selectByName();
-	public MemberBean selectById();
-	public String memberCount();
+	public ArrayList<MemberBean> selectAllMembers();
+	public ArrayList<MemberBean> selectMembersByName();
+	public MemberBean selectMemberById(String id);
+	public String CountMembers();
 	public boolean existMember();
-	public void updatePass();
-	public void deleteId();
+	public void updateMember(MemberBean member);
+	public void deleteMember(String id,String pass);
 }

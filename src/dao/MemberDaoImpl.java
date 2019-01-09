@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import domain.MemberBean;
+import pool.Constant;
 
 public class MemberDaoImpl implements MemberDao{
 	
@@ -19,8 +20,7 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void insertMember(MemberBean member) {
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "oracle", "password");
+			conn = DriverManager.getConnection(Constant.ORACLE_URL,Constant.USERNAME,Constant.PASSWORD);
 			stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO member(id,name,pass,ssn) \n"
 					+ "VALUES('%s','%s','%s','%s')", 
@@ -40,45 +40,128 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public ArrayList<MemberBean> selectMembers() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<MemberBean> selectAllMembers() {
+		ArrayList<MemberBean> arrayList = new ArrayList<>();
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "oracle","password");
+			stmt = conn.createStatement();
+			String sql = String.format("", "");
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arrayList;
 	}
 
 	@Override
-	public ArrayList<MemberBean> selectByName() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<MemberBean> selectMembersByName() {
+		ArrayList<MemberBean> arrayList = new ArrayList<>();
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "oracle","password");
+			stmt = conn.createStatement();
+			String sql = String.format("","");
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return arrayList;
 	}
 
 	@Override
-	public MemberBean selectById() {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberBean selectMemberById(String id) {
+		MemberBean member = new MemberBean();
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","oracle", "password");
+			stmt = conn.createStatement();
+			String sql = String.format("", "");
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) { //검색된 결과가 존재하면 TRUE 리턴
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return member;
 	}
 
 	@Override
-	public String memberCount() {
-		// TODO Auto-generated method stub
-		return null;
+	public String CountMembers() {
+		String count = "";
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","oracle", "password");
+			stmt = conn.createStatement();
+			String sql = String.format("","");
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count;
 	}
 
 	@Override
 	public boolean existMember() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean exist = true;
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","oracle", "password");
+			stmt = conn.createStatement();
+			String sql = String.format("", "");
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return exist;
 	}
 
 	@Override
-	public void updatePass() {
-		// TODO Auto-generated method stub
+	public void updateMember(MemberBean member) {
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","oracle", "password");
+			stmt = conn.createStatement();
+			String sql = String.format("", "");
+			stmt.executeUpdate(sql);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
-	public void deleteId() {
-		// TODO Auto-generated method stub
-		
+	public void deleteMember(String id,String pass) {
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","oracle", "password");
+			stmt = conn.createStatement();
+			String sql = String.format("", "");
+			stmt.executeUpdate(sql);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
 }

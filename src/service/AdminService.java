@@ -6,11 +6,11 @@ import domain.AdminBean;
 
 public interface AdminService {
 	//CRUD
-	public void createEmployee(String adminNum,String name,String pass,String auth);
-	public ArrayList<AdminBean> list();
-	public ArrayList<AdminBean> findName(String name);
-	public AdminBean findEmployeeNum(String adminNum);
-	public String employeeCount();
-	public void updateAuth(String adminNum);
-	public void deleteEmployeeNum(String adminNum,String pass);
+	public void createEmployee(AdminBean admin);
+	public ArrayList<AdminBean> findEmployeeAll();
+	public ArrayList<AdminBean> findByName(String name);
+	public AdminBean findByEmployeeNum(String employeeNum);
+	public String countEmployee();
+	public void changeAuth(String EmployeeNum);
+	public void removeEmployeeNum(String EmployeeNum);
 }

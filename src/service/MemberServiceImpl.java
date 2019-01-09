@@ -1,65 +1,65 @@
 package service;
 
 import java.util.ArrayList;
-
 import dao.MemberDaoImpl;
 import domain.MemberBean;
 
 public class MemberServiceImpl implements MemberService{
 	
 	private static MemberServiceImpl instance = new MemberServiceImpl();
-	private MemberServiceImpl() {}
+	private MemberServiceImpl() { dao = MemberDaoImpl.getInstance();}
 	public static MemberServiceImpl getInstance() {return instance;}
-
+	MemberDaoImpl dao;
 	@Override
 	public void createMember(MemberBean member) {
 		System.out.println("멤버 서비스임플로 들어옴");
 		System.out.println("컨트롤러에서 넘어온 정보");
 		System.out.println("ID" + member.getId());
 		System.out.println("name"+member.getName());
-		MemberDaoImpl.getInstance().insertMember(member);
+		dao.insertMember(member);
 	}
 
 	@Override
-	public ArrayList<MemberBean> list() {
+	public ArrayList<MemberBean> findAllMembers() {
 		ArrayList<MemberBean> list = new ArrayList<>();
+		list = dao.selectAllMembers();
 		return list;
 	}
 
 	@Override
-	public ArrayList<MemberBean> findName(String name) {
+	public ArrayList<MemberBean> findMembersByName(String name) {
 		ArrayList<MemberBean> list = new ArrayList<>();
+		list = dao.selectMembersByName();
 		return list;
 	}
 
 	@Override
-	public MemberBean findId(String id) {
-		MemberBean member = new MemberBean();
-		
+	public MemberBean findMembersById(String id) {
+		MemberBean member = dao.selectMemberById(id);
 		return member;
 	}
 
 	@Override
-	public String memberCount() {
+	public String countMember() {
 		String count="";
+		count = dao.CountMembers();
 		return count;
 	}
 	
 	@Override
-	public boolean existMember() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existMember(String id,String pass) {
+		boolean exist = true;
+		exist = dao.existMember();
+		return exist;
 	}
 
 	@Override
-	public void updatePass(String id, String pass, String newpass) {
-		// TODO Auto-generated method stub
-		
+	public void changeMember(MemberBean member) {
+		dao.updateMember(member);
 	}
 
 	@Override
-	public void deleteId(String id) {
-		// TODO Auto-generated method stub
-		
+	public void remoneId(String id,String pass) {
+		dao.deleteMember(id, pass);
 	}
 }
