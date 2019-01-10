@@ -12,10 +12,6 @@ public class MemberServiceImpl implements MemberService{
 	MemberDaoImpl dao;
 	@Override
 	public void createMember(MemberBean member) {
-		System.out.println("멤버 서비스임플로 들어옴");
-		System.out.println("컨트롤러에서 넘어온 정보");
-		System.out.println("ID" + member.getId());
-		System.out.println("name"+member.getName());
 		dao.insertMember(member);
 	}
 
@@ -35,8 +31,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberBean findMembersById(String id) {
-		MemberBean member = dao.selectMemberById(id);
-		return member;
+		return dao.selectMemberById(id);
 	}
 
 	@Override
@@ -48,9 +43,13 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public boolean existMember(String id,String pass) {
-		boolean exist = true;
-		exist = dao.existMember();
-		return exist;
+		boolean loginOk = false;
+		MemberBean bean = new MemberBean();
+		bean = dao.existMember(id,pass);
+		if(bean != null &&id.equals(bean.getId()) && pass.equals(bean.getPass())) {
+			loginOk = true;
+		}
+		return loginOk;
 	}
 
 	@Override

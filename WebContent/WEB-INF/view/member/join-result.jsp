@@ -1,19 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h3>가입한 ID : <%=  %> </h3><br />
-	<h3>이 름 : <%=  %></h3><br />
-	<h3>가입한 비밀번호 : ***** </h3><br />
-	<h3>생년월일 : <%=  %>년 <%=  %> 월 <%=  %> 일생 </h3><br />
-	<h3>성별 : <%=  %></h3><br />
-	<h3>BMI : <%=  %></h3><br />
-	<a href="login-form.jsp">로그인 이동</a><br />
-	<a href="../index.jsp">홈으로 이동</a>
-</body>
-</html>
+    <%@ page import="domain.MemberBean" %>
+<div id="mypage">
+<h1>마이페이지</h1>
+<%
+MemberBean member = (MemberBean)request.getAttribute("member");
+%>
+	<table>
+		<tr>
+			<th>\</th>
+			<th>내용</th>
+		</tr>
+		<tr>
+			<td>ID</td>
+			<td><%=member.getId() %></td>
+		</tr>
+		<tr>
+			<td>NAME</td>
+			<td><%=member.getName() %></td>
+		</tr>
+		<tr>
+			<td>PASS</td>
+			<td><%=member.getPass() %></td>
+		</tr>
+		<tr>
+			<td>SSN</td>
+			<td><%=member.getSsn() %></td>
+		</tr>
+	</table>	
+</div>

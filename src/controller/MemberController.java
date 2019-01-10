@@ -20,46 +20,49 @@ public class MemberController extends HttpServlet {
 		dir = (dir==null)? request.getServletPath().substring(1, request.getServletPath().indexOf('.')): dir ;
 		String page = request.getParameter("page");
 		page = (page==null)? "main":page;
+		String dest = request.getParameter("dest");
+		dest = (dest==null)? "NONE":dest;
 		switch(cmd) {
 		case "login" :
 			String id = request.getParameter("id");
 			String pass = request.getParameter("pass");
 			System.out.println("아이디 : "+id + "비번 : " + pass);
-			if(!(id.equals("asa1374") && pass.equals("ckdwns2"))) {
+			if(MemberServiceImpl.getInstance().existMember(id, pass)) {
+				request.setAttribute("member", MemberServiceImpl.getInstance().findMembersById(id));
+				request.setAttribute("dest", dest);
+				System.out.println("로긍니 성공");
+			}else{
+				System.out.println("로그인 실패");
 				dir = "";
 				page="index";
 			}
-			request.setAttribute("name", "이창준");
-			request.setAttribute("compo", "login-success");
-			Command.move(request, response, dir,page);
 			break;
 		case "move" :
-			String dest = request.getParameter("dest");
-			dest = (dest==null)? "NONE": dest;
+			dest = request.getParameter("dest");
 			request.setAttribute("dest", dest);
-			Command.move(request, response, dir,page);
 			break;
 		case "join" :
-			request.setAttribute("dest", "mypage");
 			member = new MemberBean();
-			id = request.getParameter("id");
-			member.setId(id);
-			String name  = request.getParameter("name");
-			member.setName(name);
-			pass = request.getParameter("pass");
-			member.setPass(pass);
-			String ssn = request.getParameter("ssn");
-			member.setSsn(ssn);
+			member.setId(request.getParameter("id"));
+			member.setName(request.getParameter("name"));
+			member.setPass(request.getParameter("pass"));
+			member.setSsn(request.getParameter("ssn"));
 			MemberServiceImpl.getInstance().createMember(member);
-			member = MemberServiceImpl.getInstance().findMembersById(id);
+			member = MemberServiceImpl.getInstance()
+					.findMembersById(member.getId());
+			request.setAttribute("dest", request.getParameter("dest"));
 			request.setAttribute("member", member);
-			Command.move(request, response, dir,page);
+			break;
+		case "logout" :
+			dir = "";
+			page="index";
+			dest = "";
 			break;
 		case "findAll" :
 			MemberServiceImpl.getInstance().findAllMembers();
 			break;
 		case "findByName" :
-			name = request.getParameter("name");
+			String name = request.getParameter("name");
 			MemberServiceImpl.getInstance().findMembersByName(name);
 			break;
 		case "findById" :
@@ -78,6 +81,7 @@ public class MemberController extends HttpServlet {
 			MemberServiceImpl.getInstance().remoneId(id, pass);
 			break;
 		}
+		Command.move(request, response, dir,page);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
