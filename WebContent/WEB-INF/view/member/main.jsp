@@ -47,10 +47,14 @@
 					<%@ include file="join-form.jsp" %>
 					<%
 					break;
-				case "mypage" :
-					System.out.print("mypage로 들어옴");
+				case "member-detail" :
 					%>
-					<%@ include file="mypage.jsp" %>
+					<%@ include file="member-detail.jsp" %>
+					<%
+					break;
+				case "member-update" :
+					%>
+					<%@ include file="member-update.jsp" %>
 					<%
 					break;
 				}

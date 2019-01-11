@@ -6,7 +6,7 @@
 			<td>마이페이지</td>
 		</tr>
 		<tr>
-			<td>정보 변경</td>
+			<td><a href="member.do?dest=member-update">정보 변경</a></td>
 		</tr>
 		<tr>
 			<td>회원탈퇴</td>

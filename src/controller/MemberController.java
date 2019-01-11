@@ -1,10 +1,13 @@
 package controller;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import command.Command;
 import domain.MemberBean;
 import service.MemberServiceImpl;
@@ -22,17 +25,17 @@ public class MemberController extends HttpServlet {
 		page = (page==null)? "main":page;
 		String dest = request.getParameter("dest");
 		dest = (dest==null)? "NONE":dest;
+		HttpSession session = request.getSession();
+		
 		switch(cmd) {
 		case "login" :
 			String id = request.getParameter("id");
 			String pass = request.getParameter("pass");
 			System.out.println("아이디 : "+id + "비번 : " + pass);
 			if(MemberServiceImpl.getInstance().existMember(id, pass)) {
-				request.setAttribute("member", MemberServiceImpl.getInstance().findMembersById(id));
+				session.setAttribute("member", MemberServiceImpl.getInstance().findMembersById(id));
 				request.setAttribute("dest", dest);
-				System.out.println("로긍니 성공");
 			}else{
-				System.out.println("로그인 실패");
 				dir = "";
 				page="index";
 			}
@@ -50,13 +53,14 @@ public class MemberController extends HttpServlet {
 			MemberServiceImpl.getInstance().createMember(member);
 			member = MemberServiceImpl.getInstance()
 					.findMembersById(member.getId());
+			session.setAttribute("member", member);
 			request.setAttribute("dest", request.getParameter("dest"));
-			request.setAttribute("member", member);
 			break;
 		case "logout" :
 			dir = "";
 			page="index";
 			dest = "";
+			session.invalidate();
 			break;
 		case "findAll" :
 			MemberServiceImpl.getInstance().findAllMembers();

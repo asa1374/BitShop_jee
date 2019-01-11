@@ -19,7 +19,7 @@ public class MemberDaoImpl implements MemberDao{
 				.createDatabase("oracle")
 				.getConnection()
 				.createStatement()
-				.executeQuery(
+				.executeUpdate(
 						String.format("INSERT INTO member(id, name, pass, ssn)\n"
 								+"VALUES('%s', '%s', '%s', '%s')",
 								member.getId(),member.getName(),
